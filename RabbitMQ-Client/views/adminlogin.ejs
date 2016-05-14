@@ -29,10 +29,7 @@
 <body style="background-color: #867979">
 
 	<div class="container">
-		<br>
-		<br>
-		<br>
-		<br>
+		<br> <br> <br> <br>
 		<div class="row">
 
 
@@ -45,10 +42,11 @@
 
 				<div data-ng-app="loginAdminApp"
 					data-ng-controller="loginAdminController">
-					<form class="form-vertical" name="loginAdmin" data-ng-submit="loginAdmin.$valid && loginAdmin1()" novalidate>
+					<form class="form-vertical" name="loginAdmin"
+						data-ng-submit="loginAdmin.$valid && loginAdmin1()" novalidate>
 
-						<h1 style="color: #fff; text-align: center; font-size: 40px;">A D M I N
-						</h1>
+						<h1 style="color: #fff; text-align: center; font-size: 40px;">A
+							D M I N</h1>
 						<hr>
 
 						<div style="font-size: 16px; color: #fff;"
@@ -56,9 +54,12 @@
 							data-ng-class="{
                     'has-error': (loginAdmin.email.$touched||loginAdmin.email.$dirty|| loginAdmin.submitted) && loginAdmin.email.$invalid,
                     'has-success': loginAdmin.email.$dirty && loginAdmin.email.$valid}">
-                    <div class="alert alert-danger"  data-ng-show="serverMessage"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>{{serverMessage}}</div>
-							<label class=" control-label" for="email">Email</label> 
-							<input class="form-control" type="email" value="" data-ng-model="admin.email" name="email" id="email"
+							<div class="alert alert-danger" data-ng-show="serverMessage">
+								<span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>{{serverMessage}}
+							</div>
+							<label class=" control-label" for="email">Email</label> <input
+								class="form-control" type="email" value=""
+								data-ng-model="admin.email" name="email" id="email"
 								placeholder="name@example.com" data-ng-pattern="/\S+@\S+\.\S+/"
 								required>
 							<div class="alert alert-danger"
@@ -77,8 +78,9 @@
 							data-ng-class="{
                     'has-error': (loginAdmin.password.$touched||loginAdmin.password.$dirty||loginAdmin.submitted) && loginAdmin.password.$invalid,
                     'has-success': loginAdmin.password.$dirty && loginAdmin.password.$valid}">
-							<label class=" control-label" for="password">Password</label> 
-							<input class="form-control" type="password" value="" data-ng-model="admin.password" name="password" id="password"
+							<label class=" control-label" for="password">Password</label> <input
+								class="form-control" type="password" value=""
+								data-ng-model="admin.password" name="password" id="password"
 								data-ng-pattern="/[a-zA-Z0-9]{5,}/"
 								placeholder="At least 6 characters" required>
 							<div class="alert alert-danger"
@@ -93,7 +95,8 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<button type="submit" class="btn btn-lg btn-info btn-block" style=" font-size:16px;"
+							<button type="submit" class="btn btn-lg btn-info btn-block"
+								style="font-size: 16px;"
 								data-ng-click="loginAdmin.submitted=true">LOG IN</button>
 						</div>
 					</form>

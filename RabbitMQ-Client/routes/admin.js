@@ -50,7 +50,73 @@ function loginadmin(req,res){
 	
 }
 
+function getSensorList(req, res){
+	console.log("inside getSensorList");
+	var msg_payload = {};
+	mq_client.make_request('sensor_queue', msg_payload, function(err,results) {
+	       
+        if (err){
+            console.log(err);
+            res.send(err);
+        } 
+        else {
+        	console.log("inside getSensorList else after getting proper resulds");
+            if(results.status == 200){
+            	console.log("result.data"+ results.data);
+            	res.send(results.data);
+            	
+            }            
+            else{
+            	
+            	console.log("IN ELSE OF ADMIN LOGIN");
+            	
+            	res.status(404).send(" Invalid Usernam & Password! Please try again.");           	         	
+            }
+        }
+    });
+	
+}
 
+function adminAddSensor(req,res){
+	
+	var sensor_id = req.body.sensorid;
+	var sensor_name = req.body.sensorname;
+	var sensor_type = req.body.sensortype;
+	var sensor_location = req.body.location;
+	var manufacturer = req.body.manufacturer;
+console.log("manu :"+manufacturer);
+	var msg_payload = {"sensor_id": sensor_id, "sensor_name" : sensor_name, "sensor_type" : sensor_type, "sensor_location" : sensor_location,"manufacturer" :manufacturer};
+	
+	mq_client.make_request('sensor_queue', msg_payload, function(err,results) { 
+		
+		if (err){
+            console.log(err);
+            res.send(err);
+        } 
+        else {
+            if(results.status == 200){
+            	console.log("result.data"+ results.data);
+            	res.send(results.data);
+            	
+            }
+            else{
+            	
+            	console.log("IN ELSE OF ADMIN Add Sensor");
+            	
+            	res.status(404).send(" Something went wrong.");           	         	
+            }
+        }
+		
+	});
+	
+}
 
+function getAdminDashboard(req,res){
+	res.render("adminDashboard");
+}
+
+exports.adminAddSensor=adminAddSensor
+exports.getAdminDashboard=getAdminDashboard
+exports.getSensorList = getSensorList;
 exports.login = login;
 exports.loginadmin = loginadmin;

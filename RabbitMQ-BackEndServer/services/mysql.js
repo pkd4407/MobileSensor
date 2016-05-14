@@ -5,7 +5,7 @@ function getConnection(){
 	var connection = mysql.createConnection({
 	    host     : '127.0.0.1',
 	    user     : 'root',
-	    password : '',
+	    password : 'ishan',
 	    database : 'mobilesensor',
 	    port	 : 3306
 	});
