@@ -87,7 +87,7 @@ function adminAddSensor(req,res){
 console.log("manu :"+manufacturer);
 	var msg_payload = {"sensor_id": sensor_id, "sensor_name" : sensor_name, "sensor_type" : sensor_type, "sensor_location" : sensor_location,"manufacturer" :manufacturer};
 	
-	mq_client.make_request('sensor_queue', msg_payload, function(err,results) { 
+	mq_client.make_request('addAdminSensor_queue', msg_payload, function(err,results) { 
 		
 		if (err){
             console.log(err);

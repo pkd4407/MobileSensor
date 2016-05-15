@@ -65,7 +65,7 @@ color:red;
                     'has-error': (loginCust.password.$touched||loginCust.password.$dirty||loginCust.submitted) && loginCust.password.$invalid,
                     'has-success': loginCust.password.$dirty && loginCust.password.$valid}">
                 <label  class=" control-label" for="password">Password</label>
-                <input class="form-control" type="password" value=""  data-ng-model="customer.password" name="password" id="password"  data-ng-pattern="/[a-zA-Z0-9]{6,}/" placeholder="At least 5 characters" required>
+                <input class="form-control" type="password" value=""  data-ng-model="customer.password" name="password" id="password"  data-ng-pattern="/[a-zA-Z0-9]{6,}/" placeholder="At least 6 characters" required>
                  <div class="alert alert-danger" data-ng-show="(loginCust.submitted||loginCust.password.$dirty) && loginCust.password.$error.pattern "><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>Password should be at least 6 characters</div>
                 <div class="alert alert-danger"  data-ng-show="(loginCust.submitted||loginCust.password.$touched) && loginCust.password.$error.required"><span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>Password required.</div>
               </div>

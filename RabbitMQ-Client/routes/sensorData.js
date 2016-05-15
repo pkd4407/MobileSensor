@@ -1,23 +1,33 @@
 var http = require("http");
 var request = require('request'); // make an HTTP GET request to the url
 var stats = require('stats-analysis');
+var plotly = require('plotly')("wendyhz2hu", "rpo6e5j8ke");
 
 
 function getSensorData(req,res){
+	var sensor = req.query.sensor;
+	console.log(sensor);
+	sensor = JSON.parse(sensor);
+	console.log("sensorid : "+sensor.sensorid)
 	var lat, lon, location, data, sum = 0, len, arr = [], mean, standardDeviation, median;
-	 var sensor_id = 1;
-	 var sensor_type = "wind_from_direction";
+	 var sensor_id = sensor.sensorid;
+	 var sensor_type = sensor.sensortype.toLowerCase();
+	 console.log("sensortype : "+sensor_type);
 	 //var type_range = "&wind_speed>=1&wind_speed<=1.5";
-	 var range_min = 10;   		// range_min: &wind_speed>=1
-	var range_max = 110;			// range_max: &wind_speed<=1.5
+	 var range_min;   		// range_min: &wind_speed>=1
+	var range_max;			// range_max: &wind_speed<=1.5
 	
 	 switch(sensor_id){
 		case 1: // Oakland
 			this.location = 'edu_utah_mesowest_c6723.json?';
+			range_min = 10;
+			range_max = 110;			
 			break;
 
 		case 2: // San Francisco
 			this.location = 'noaa_nos_co_ops_9414290.json?';
+			range_min = 1;
+			range_max = 1.5;
 			break;
 		
 		case 3: // Santa Cruz
@@ -122,9 +132,28 @@ request(url, function (error, response, body) {
 			median = stats.median(arr);
 			standardDeviation = stats.stdev(arr).toFixed(4);
 			
-			global.statResult ={mean:mean, median:median, standardDeviation:standardDeviation};
-			console.log(global.statResult);
-			global.statResult;
+			// box-plot
+			var boxPlotData = [
+			            {
+			              y: arr,
+			              boxpoints: "all",
+			              jitter: 0.3,
+			              pointpos: -1.8,
+			              type: "box"
+			            }
+			          ];
+			
+			var graphOptions = {filename: "box-plot-jitter", fileopt: "overwrite"};
+			plotly.plot(boxPlotData, graphOptions, function (err, msg) {
+			    console.log("message : "+msg);
+			});
+			
+			
+			
+			var plot = "https://plot.ly/~wendyhz2hu/0";
+			var jsonResponses ={mean:mean, median:median, standardDeviation:standardDeviation, plot:plot};
+			console.log(jsonResponses);
+			res.send(jsonResponses);
 	  }
 	});	
 }

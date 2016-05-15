@@ -22,13 +22,12 @@ function signupcustomer(msg,callback){
 	
 	console.log("inside server signup");
 	
-	var customer_id = msg.customer_id;
+	//var customer_id = msg.customer_id;
 	var email = msg.email;
 	var password = msg.password;
 	var response;
 	
-	var sqlQuery = "INSERT INTO customer (customer_id, email, password) VALUES (" + 
-    				"'" + customer_id + "'," +
+	var sqlQuery = "INSERT INTO customer (email, password) VALUES (" + 
     				"'" + email + "'," +
     				"'" + password + "')";
 	
@@ -150,7 +149,7 @@ function getUserSensorList(msg,callback){
 	var customer_id = msg.customer_id;
 	var response;
 	console.log("inside getUserSensorList");
-	var sqlQuery = "SELECT 	sensordetails.sensorname , sensordetails.sensortype, sensordetails.location, sensordetails.manufacturer, sensordetails.sensorstatus from sensordetails , sensorconfiguration where sensordetails.sensorid = sensorconfiguration.sensorid and sensorconfiguration.customer_id = '"+customer_id+"'";
+	var sqlQuery = "SELECT 	sensordetails.sensorid , sensordetails.sensorname , sensordetails.sensortype, sensordetails.location, sensordetails.manufacturer, sensordetails.sensorstatus, sensordetails.sensortypealias from sensordetails , sensorconfiguration where sensordetails.sensorid = sensorconfiguration.sensorid and sensorconfiguration.customer_id = '"+customer_id+"'";
 	
 	mysql.fetchData(function(err,result){
 		

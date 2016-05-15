@@ -50,6 +50,7 @@ app.get('/getSensorList', admin.getSensorList);
 app.get('/getUserSensorList', customer.getUserSensorList);
 app.get('/getSensorData', sensor.getSensorData);
 app.get('/adminDashboard', admin.getAdminDashboard);
+app.get('/signOut', customer.signOut);
 
 //post requests
 app.post('/loginAdmin',admin.loginadmin);

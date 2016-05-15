@@ -28,11 +28,11 @@ function login(req,res){
 
 function signupCustomer(req,res){
 	
-	var customer_id = req.param('email');
+	//var customer_id = req.param('email');
 	var email 	 = req.param('email');
 	var password = req.param('password');
 	
-	var msg_payload = { "customer_id" : customer_id, "email" : email, "password" : password, "type" : "signupCustomer" };
+	var msg_payload = {"email" : email, "password" : password, "type" : "signupCustomer" };
 	
 	mq_client.make_request('customer_queue', msg_payload, function(err,results) {
     	
@@ -159,6 +159,12 @@ function subscribeSensor(req,res){
 }
 
 
+function signOut(req, res){
+	req.session.destroy();
+	res.render('index');
+}
+
+exports.signOut=signOut;
 exports.subscribeSensor=subscribeSensor;
 exports.getUserSensorList=getUserSensorList;
 exports.signup = signup;

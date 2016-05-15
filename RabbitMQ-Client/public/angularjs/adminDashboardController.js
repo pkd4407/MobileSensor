@@ -3,13 +3,16 @@ var adminApp = angular.module('adminApp', ['ngRoute']);
 adminApp.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/adminAddSensors', {
         templateUrl: '../partials/adminAddSensor.ejs',
-        controller: 'AddSensorController'
+        controller: 'AdminAddSensorController'
     }).when('/', {
         templateUrl: '../partials/adminDashboardSummary.ejs',
         controller: 'DashboardSummaryController'
     }).when('/getUserSensors', {
         templateUrl: '../partials/userSensorPage.ejs',
         controller: 'UserSensorController'
+    }).when('/addsensors', {
+        templateUrl: '../partials/adminSensorListPage.ejs',
+        controller: 'AddSensorController'
     })
 }]);
 
@@ -17,9 +20,6 @@ adminApp.config(['$routeProvider', function ($routeProvider) {
 adminApp.controller("DashboardSummaryController", [ "$scope", "$http","$location", function($scope, $http, $location) {
 			console.log("inside DashboardSummaryController");
 			$http.get('/getDashboardSummary').then(function(result) {
-			/*console.log(result.data.configCount[0].configCount);
-			$scope.configCount = result.data.configCount[0].configCount;
-			$scope.sensorcount = result.data.sensorcount[0].sensorcount;*/
 			$location.path('/');
 			});
 
@@ -27,7 +27,7 @@ adminApp.controller("DashboardSummaryController", [ "$scope", "$http","$location
 
 
 
-adminApp.controller("AddSensorController", [ "$scope", "$http", "$location",
+adminApp.controller("AdminAddSensorController", [ "$scope", "$http", "$location",
 		function($scope, $http, $location) {
 			console.log("inside AddSensorController ");
 			
@@ -48,4 +48,17 @@ adminApp.controller("AddSensorController", [ "$scope", "$http", "$location",
 			}
 			
 			
+		} ]);
+
+
+adminApp.controller("AddSensorController", [ "$scope", "$http", "$location",
+		function($scope, $http, $location) {
+			console.log("inside AddSensorController ");
+
+			$http.get('/getSensorList').then(function(result) {
+				console.log(result);
+				$scope.sensorList = result.data;
+				$location.path('/addsensors');
+			});
+
 		} ]);
