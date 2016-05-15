@@ -1,0 +1,58 @@
+
+	<div class ="row">
+		<div align="center">
+			<h3>Sensor Management</h3>
+		</div>
+	</div>
+	
+	<div class="container" >
+	    <div class="row" align="center">
+	        <form name="sensor">
+	            <div class="col-lg-10">
+	                <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Required Field</strong></div>
+	                <div class="form-group">
+	                    <label for="SensorId">Sensor  Id</label>
+	                    <div class="input-group">
+	                        <input type="text" class="form-control" data-ng-model="sensorid" placeholder="Enter Sensor Id" required>
+	                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="SensorName">Sensor  Name</label>
+	                    <div class="input-group">
+	                        <input type="text" class="form-control" data-ng-model="sensorname" placeholder="Enter Sensor Name" required>
+	                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="SensorType">Sensor  Type</label>
+	                    <div class="input-group">
+	                        <select class="form-control" data-ng-model="sensortype" placeholder="Select Sensor">
+	                       		<option value="temperature">Temperature</option>
+	  							<option value="windspeed">Wind Speed</option>
+	  							<option value="winddirecton">Wind Direction</option>
+							</select>
+	                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="SensorLocation">Location</label>
+	                    <div class="input-group">
+	                        <input type="text" class="form-control" data-ng-model="location" placeholder="Enter Sensor Location" required>
+	                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+	                    <label for="SensorId">Manufacturer</label>
+	                    <div class="input-group">
+	                        <input type="text" class="form-control" data-ng-model="manufacturer" placeholder="Manufacturer" required>
+	                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+	                    </div>
+	                </div>
+	                <div>
+	                	<button type="submit" name="action" id="submit" class="btn btn-info pull-center" ng-click="adminAddSensor()">Add Sensor</button>
+	            	</div>                	
+	            </div>
+	        </form>
+	    </div>
+	</div>

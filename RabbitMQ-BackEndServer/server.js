@@ -123,7 +123,7 @@ cnn.on('ready', function(){
 cnn.on('ready', function(){
 	console.log("listening on sensor_queue");
 
-	cnn.queue('sensor_queue', function(q){
+	cnn.queue('addAdminSensor_queue', function(q){
 		q.subscribe(function(message, headers, deliveryInfo, m){
 			util.log(util.format( deliveryInfo.routingKey, message));
 			util.log("Message: "+JSON.stringify(message));

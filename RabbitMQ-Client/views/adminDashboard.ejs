@@ -13,8 +13,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.3/angular-route.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.4.3/angular-sanitize.min.js"></script>
-  <script src="/angularjs/customerDashboardController.js"></script>
+  <script src="/angularjs/adminDashboardController.js"></script>
 
     <title>Water Sensor Cloud System </title>
 
@@ -49,7 +48,7 @@
 
 </style>
 
-<body  ng-app = "customerApp">
+<body  ng-app = "adminApp">
 
     <div id="wrapper">
 
@@ -93,13 +92,13 @@
                         <li>
                             <a href="#/"><i class="fa fa-dashboard fa-fw"></i> Home </a>
                         </li>
-                       <li>
-                            <a href="#/getUserSensors"><i class="fa fa-dashboard fa-fw"></i> Sensor Configuration </a>
-                        </li>
+                       
                         <li>
                             <a href="#/addsensors"><i class="fa fa-dashboard fa-fw"></i> Sensor Management </a>
                         </li>
-                        
+                        <li>
+                            <a href="#/adminAddSensors"><i class="fa fa-dashboard fa-fw"></i> Add New Sensor </a>
+                        </li>
                        
                     </ul>
                 </div>
@@ -109,7 +108,7 @@
         </nav>
 
         <div id="page-wrapper">
-            <div ng-view>nknknkn</div>    
+            <div ng-view></div>    
         </div>
           
         </div>
