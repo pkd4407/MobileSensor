@@ -1,8 +1,8 @@
 var http = require("http");
 var request = require('request'); // make an HTTP GET request to the url
 var stats = require('stats-analysis');
-var plotly = require('plotly')("wendyhz2hu", "rpo6e5j8ke");
-
+var plotly = require('plotly')("281team16", "hvebdout2z");
+var plotUrl;
 
 function getSensorData(req,res){
 	var sensor = req.query.sensor;
@@ -83,6 +83,7 @@ function getSensorData(req,res){
 	
 	
 request(url, function (error, response, body) {
+	 
 		
 		// helper function to check if the JSON file is empty
 		function isJSONEmpty(obj){
@@ -146,14 +147,12 @@ request(url, function (error, response, body) {
 			var graphOptions = {filename: "box-plot-jitter", fileopt: "overwrite"};
 			plotly.plot(boxPlotData, graphOptions, function (err, msg) {
 			    console.log("message : "+msg);
+			    console.log("message url : "+msg.url);
+				var jsonResponses ={mean:mean, median:median, standardDeviation:standardDeviation, plot:msg.url};
+				console.log(jsonResponses);
+				res.send(jsonResponses);
 			});
 			
-			
-			
-			var plot = "https://plot.ly/~wendyhz2hu/0";
-			var jsonResponses ={mean:mean, median:median, standardDeviation:standardDeviation, plot:plot};
-			console.log(jsonResponses);
-			res.send(jsonResponses);
 	  }
 	});	
 }

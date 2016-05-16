@@ -65,6 +65,7 @@ customerApp.controller("AddSensorController", [ "$scope", "$http", "$location",
 			$scope.subscribeSensor = function(sensor) {
 				$http.post('/subscribeSensor', {"sensor" : sensor}).then(function(result) {
 					console.log(result);
+					window.alert("User Subscribed Succesfully.!!")
 					$location.path('/addsensors');
 				});
 			}
@@ -77,6 +78,7 @@ customerApp.controller("UserSensorController", [ "$scope", "$http", "$location",
     		function($scope, $http, $location,$sce) {
 				$scope.hideSenorData = true;
 				$scope.hideSensorList = true;
+				$scope.isDisabled = false;
     			console.log("inside UserSensorController ");
 
     			$http.get('/getUserSensorList').then(function(result) {
@@ -104,13 +106,5 @@ customerApp.controller("UserSensorController", [ "$scope", "$http", "$location",
     				$scope.hideSensorList = true;
     				//$location.path('/sensorData');
     			});
-    			}
-    			
-    			$scope.subscribeSensor = function(sensor){
-    				
-    				$scope.sensor.sensorname = sensor.sensorname;
-    				$scope.sensor.sensortypealias = sensor.sensortypealias;
-    				$scope.sensor.location = sensor.location;
-    				$scope.sensor.manufacturer = sensor.manufacturer;
     			}
     		} ]);
