@@ -84,8 +84,25 @@ function adminAddSensor(req,res){
 	var sensor_type = req.body.sensortype;
 	var sensor_location = req.body.location;
 	var manufacturer = req.body.manufacturer;
-console.log("manu :"+manufacturer);
-	var msg_payload = {"sensor_id": sensor_id, "sensor_name" : sensor_name, "sensor_type" : sensor_type, "sensor_location" : sensor_location,"manufacturer" :manufacturer};
+	var sensortypealias ="";
+	
+	if(sensor_type = "temperature"){
+		
+		sensor_type = "air_temperature";
+		sensortypealias = "Temperature"
+	}
+	else if(sensor_type = "windspeed"){
+		
+		sensor_type = "wind_speed";
+		sensortypealias = "Wind Speed";
+	}
+	else{
+		sensor_type = "wind_from_direction";
+		sensortypealias = "Wind Direction";
+	}
+	
+    console.log("manu :"+manufacturer);
+	var msg_payload = {"sensor_id": sensor_id, "sensor_name" : sensor_name, "sensor_type" : sensor_type, "sensor_location" : sensor_location,"manufacturer" :manufacturer,"sensortypealias" :sensortypealias};
 	
 	mq_client.make_request('addAdminSensor_queue', msg_payload, function(err,results) { 
 		

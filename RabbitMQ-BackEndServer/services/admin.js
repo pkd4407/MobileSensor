@@ -57,7 +57,7 @@ function getSensorList(msg,callback){
 		
 			if(err){ 
 				
-				response =({status:500, message: "Admin! Login failed" });
+				response =({status:500, message: "Admin! SensorList failed" });
 				callback(null,response);
 			}
 			else{
@@ -88,10 +88,11 @@ function addAdminSensor(msg,callback){
 	var sensor_type = msg.sensor_type;
 	var sensor_location = msg.sensor_location;
 	var manufacturer = msg.manufacturer;
+	var sensortypealias = msg.sensortypealias;
 	
 	var response;
 	
-	var sqlQuery = "INSERT INTO sensordetails  (sensorid , sensorname, sensortype, location,manufacturer) VALUES ('"+sensor_id+"','"+sensor_name+"','"+sensor_type+"','"+sensor_location+"','"+manufacturer+"')";
+	var sqlQuery = "INSERT INTO sensordetails  (sensorid , sensorname, sensortype, location,manufacturer,sensortypealias) VALUES ('"+sensor_id+"','"+sensor_name+"','"+sensor_type+"','"+sensor_location+"','"+manufacturer+"','"+sensortypealias+"')";
 
 	mysql.fetchData(function(err,result){
 		

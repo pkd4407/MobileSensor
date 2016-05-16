@@ -38,7 +38,7 @@ adminApp.controller("AdminAddSensorController", [ "$scope", "$http", "$location"
 				 "sensorid" : $scope.sensorid,
 				 "sensorname" : $scope.sensorname,
 				 "sensortype" : $scope.sensortype,
-				 "location" : $scope.sensorlocation,
+				 "location" : $scope.location,
 				 "manufacturer" : $scope.manufacturer
 			 }).then(function(result) {
 				console.log(result);

@@ -108,16 +108,14 @@
 <script>
 	var app = angular.module('signupCustomerApp', []);
 	app.controller('signupCustomerController', function($http, $scope, $parse) {
-		//window.alert("first");
 		$scope.signupCustomer1 = function() {
-			window.alert("second");
 				$http({
 					method : 'POST',
 					url : '/signupCustomer',
 					data : $scope.customer
 				}).then(
 						function(response) {
-							
+							window.alert("Customer Signed Up Successfully..!!");
 							window.location.assign('/loginCustomerPage');
 
 						},

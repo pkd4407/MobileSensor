@@ -10,6 +10,9 @@ customerApp.config(['$routeProvider', function ($routeProvider) {
     }).when('/getUserSensors', {
         templateUrl: '../partials/userSensorPage.ejs',
         controller: 'UserSensorController'
+    }).when('/subscribeSensor', {
+        templateUrl: '../partials/userSensorPage.ejs',
+        controller: 'UserSensorController'
     })/*.when('/sensorData', {
         templateUrl: '../partials/sensorDataResultsPage.ejs',
         controller: 'UserSensorController'
@@ -101,5 +104,13 @@ customerApp.controller("UserSensorController", [ "$scope", "$http", "$location",
     				$scope.hideSensorList = true;
     				//$location.path('/sensorData');
     			});
+    			}
+    			
+    			$scope.subscribeSensor = function(sensor){
+    				
+    				$scope.sensor.sensorname = sensor.sensorname;
+    				$scope.sensor.sensortypealias = sensor.sensortypealias;
+    				$scope.sensor.location = sensor.location;
+    				$scope.sensor.manufacturer = sensor.manufacturer;
     			}
     		} ]);
