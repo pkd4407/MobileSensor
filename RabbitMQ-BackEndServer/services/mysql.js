@@ -6,7 +6,7 @@ function getConnection(){
 	    host     : '127.0.0.1',
 	    user     : 'parveen',
 	    password : '123456',
-	    database : 'mobilesensor',
+	    database : 'healthanalyzer',
 	    port	 : 3306
 	});
 	return connection;

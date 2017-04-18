@@ -3,15 +3,11 @@ var express = require('express')
   , http = require('http')
   , customer = require('./routes/customer')
   , sensor = require('./routes/sensorData')
-  , admin = require('./routes/admin')
+  , doctor = require('./routes/doctor')
   , path = require('path');
 
-//URL for the sessions collections in mongoDB
-//var mongoSessionConnectURL = "mongodb://localhost:27017/sessions";
-var expressSession = require("express-session");
-//var mongoStore = require("connect-mongo")(expressSession);
-//var mongo = require("./routes/mongo");
 
+var expressSession = require("express-session");
 
 var app = express();
 
@@ -26,7 +22,7 @@ app.use(express.methodOverride());
 app.use(expressSession({   
 	  
 	cookieName: 'session',    
-	secret: 'cmpe281_mobilesensor',    
+	secret: 'cmpe295B',    
 	duration: 30 * 60 * 1000,    //setting the time for active session
 	activeDuration: 5 * 60 * 1000,  })); // setting time for the session to be active when the window is open // 5 minutes set currently
 
@@ -41,25 +37,20 @@ if ('development' == app.get('env')) {
 
 // Get requests
 app.get('/', routes.index);
-app.get('/loginAdmin',admin.login);
+app.get('/loginDoctor',doctor.login);
+app.get('/doctorDashboard', doctor.getDoctorDashboard);
 app.get('/signupCustomer',customer.signup);
 app.get('/loginCustomerPage',customer.login);
 app.get('/customerDashboard',customer.customerDashboard);
 app.get('/getDashboardSummary',customer.getDashboardSummary);
-app.get('/getSensorList', admin.getSensorList);
-app.get('/getUserSensorList', customer.getUserSensorList);
-app.get('/getSensorData', sensor.getSensorData);
-app.get('/adminDashboard', admin.getAdminDashboard);
 app.get('/signOut', customer.signOut);
 
 //post requests
-app.post('/loginAdmin',admin.loginadmin);
+app.post('/loginDoctor',doctor.logindoctor);
 app.post('/signupCustomer',customer.signupCustomer);
 app.post('/loginCustomer',customer.loginCustomer);
-app.post('/subscribeSensor',customer.subscribeSensor);
-app.post('/adminAddSensor',admin.adminAddSensor);
 
-//connect to the mongo collection session and then createServer
+//createServer
 http.createServer(app).listen(app.get('port'), function(){
 	  console.log('Express server listening on port ' + app.get('port'));
 	});

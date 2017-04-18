@@ -1,3 +1,4 @@
+
 var http = require("http");
 var request = require('request'); // make an HTTP GET request to the url
 var stats = require('stats-analysis');
@@ -38,6 +39,7 @@ function getSensorData(req,res){
 	 function getTime(date) {
 			
 		    var year = date.getFullYear();
+		    year = year - 1;
 
 		    var month = date.getMonth() + 1;
 		    month = (month < 10 ? "0" : "") + month;

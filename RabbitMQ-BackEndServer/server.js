@@ -1,7 +1,7 @@
 var amqp = require('amqp'), util = require('util');
 
 var customer = require('./services/customer');
-var admin = require('./services/admin');
+var doctor = require('./services/doctor');
 
 
 //var mongoSessionConnectURL = "mongodb://localhost:27017/sessions";
@@ -16,15 +16,15 @@ var expressSession = require("express-session");
 var cnn = amqp.createConnection({host:'127.0.0.1'});
 
 cnn.on('ready', function(){
-	console.log("listening on admin_queue");
+	console.log("listening on doctor_queue");
 
-	cnn.queue('admin_queue', function(q){
+	cnn.queue('doctor_queue', function(q){
 		q.subscribe(function(message, headers, deliveryInfo, m){
 			util.log(util.format( deliveryInfo.routingKey, message));
 			util.log("Message: "+JSON.stringify(message));
 			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
-			admin.handleRequest(message, function(err,res){
-				console.log("Listening admin_queue"+message);
+			doctor.handleRequest(message, function(err,res){
+				console.log("Listening doctor_queue"+message);
 				//return index sent
 				cnn.publish(m.replyTo, res, {
 					contentType:'application/json',
@@ -57,86 +57,3 @@ cnn.on('ready', function(){
 	});	
 });
 
-cnn.on('ready', function(){
-	console.log("listening on sensor_queue");
-
-	cnn.queue('sensor_queue', function(q){
-		q.subscribe(function(message, headers, deliveryInfo, m){
-			util.log(util.format( deliveryInfo.routingKey, message));
-			util.log("Message: "+JSON.stringify(message));
-			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
-			admin.getSensorList(message, function(err,res){
-				console.log("Listening sensor_queue"+message);
-				//return index sent
-				cnn.publish(m.replyTo, res, {
-					contentType:'application/json',
-					contentEncoding:'utf-8',
-					correlationId:m.correlationId
-				});
-			});
-		});
-	});	
-});
-
-cnn.on('ready', function(){
-	console.log("listening on usersensor_queue");
-
-	cnn.queue('usersensor_queue', function(q){
-		q.subscribe(function(message, headers, deliveryInfo, m){
-			util.log(util.format( deliveryInfo.routingKey, message));
-			util.log("Message: "+JSON.stringify(message));
-			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
-			customer.getUserSensorList(message, function(err,res){
-				console.log("Listening sensor_queue"+message);
-				//return index sent
-				cnn.publish(m.replyTo, res, {
-					contentType:'application/json',
-					contentEncoding:'utf-8',
-					correlationId:m.correlationId
-				});
-			});
-		});
-	});	
-});
-
-cnn.on('ready', function(){
-	console.log("listening on subscribesensor_queue");
-
-	cnn.queue('subscribesensor_queue', function(q){
-		q.subscribe(function(message, headers, deliveryInfo, m){
-			util.log(util.format( deliveryInfo.routingKey, message));
-			util.log("Message: "+JSON.stringify(message));
-			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
-			customer.subscribeSensor(message, function(err,res){
-				console.log("Listening subscribesensor_queue"+message);
-				//return index sent
-				cnn.publish(m.replyTo, res, {
-					contentType:'application/json',
-					contentEncoding:'utf-8',
-					correlationId:m.correlationId
-				});
-			});
-		});
-	});	
-});
-
-cnn.on('ready', function(){
-	console.log("listening on sensor_queue");
-
-	cnn.queue('addAdminSensor_queue', function(q){
-		q.subscribe(function(message, headers, deliveryInfo, m){
-			util.log(util.format( deliveryInfo.routingKey, message));
-			util.log("Message: "+JSON.stringify(message));
-			util.log("DeliveryInfo: "+JSON.stringify(deliveryInfo));
-			admin.addAdminSensor(message, function(err,res){
-				console.log("Listening sensor_queue"+message);
-				//return index sent
-				cnn.publish(m.replyTo, res, {
-					contentType:'application/json',
-					contentEncoding:'utf-8',
-					correlationId:m.correlationId
-				});
-			});
-		});
-	});	
-});

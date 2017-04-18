@@ -1,7 +1,7 @@
-var adminApp = angular.module('adminApp', ['ngRoute']);
+var doctorApp = angular.module('doctorApp', ['ngRoute']);
 
-adminApp.config(['$routeProvider', function ($routeProvider) {
-    $routeProvider.when('/adminAddSensors', {
+doctorApp.config(['$routeProvider', function ($routeProvider) {
+    $routeProvider.when('/profileMgmt', {
         templateUrl: '../partials/adminAddSensor.ejs',
         controller: 'AdminAddSensorController'
     }).when('/', {
@@ -10,14 +10,14 @@ adminApp.config(['$routeProvider', function ($routeProvider) {
     }).when('/getUserSensors', {
         templateUrl: '../partials/userSensorPage.ejs',
         controller: 'UserSensorController'
-    }).when('/addsensors', {
-        templateUrl: '../partials/adminSensorListPage.ejs',
+    }).when('/customermgmt', {
+        templateUrl: '../partials/customerListPage.ejs',
         controller: 'AddSensorController'
     })
 }]);
 
 
-adminApp.controller("DashboardSummaryController", [ "$scope", "$http","$location", function($scope, $http, $location) {
+doctorApp.controller("DashboardSummaryController", [ "$scope", "$http","$location", function($scope, $http, $location) {
 			console.log("inside DashboardSummaryController");
 			$http.get('/getDashboardSummary').then(function(result) {
 			$location.path('/');
@@ -27,7 +27,7 @@ adminApp.controller("DashboardSummaryController", [ "$scope", "$http","$location
 
 
 
-adminApp.controller("AdminAddSensorController", [ "$scope", "$http", "$location",
+doctorApp.controller("AdminAddSensorController", [ "$scope", "$http", "$location",
 		function($scope, $http, $location) {
 			console.log("inside AddSensorController ");
 			
@@ -51,7 +51,7 @@ adminApp.controller("AdminAddSensorController", [ "$scope", "$http", "$location"
 		} ]);
 
 
-adminApp.controller("AddSensorController", [ "$scope", "$http", "$location",
+doctorApp.controller("AddSensorController", [ "$scope", "$http", "$location",
 		function($scope, $http, $location) {
 			console.log("inside AddSensorController ");
 

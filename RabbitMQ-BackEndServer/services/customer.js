@@ -145,65 +145,6 @@ function customerdashboard(msg,callback){
 	},sqlQuery);
 }
 
-function getUserSensorList(msg,callback){
-	var customer_id = msg.customer_id;
-	var response;
-	console.log("inside getUserSensorList");
-	var sqlQuery = "SELECT 	sensordetails.sensorid , sensordetails.sensorname , sensordetails.sensortype, sensordetails.location, sensordetails.manufacturer, sensordetails.sensorstatus, sensordetails.sensortypealias from sensordetails , sensorconfiguration where sensordetails.sensorid = sensorconfiguration.sensorid and sensorconfiguration.customer_id = '"+customer_id+"'";
-	
-	mysql.fetchData(function(err,result){
-		
-			if(err){ 
-				
-				response =({status:500, message: "Admin! Login failed" });
-				callback(null,response);
-			}
-			else{
-				
-				console.log("querying db for sensorlist");
-				if(result.length > 0){
-					console.log("results :" +result);
-					//console.log("ADMIN DATA RETRIEVED AT LOGIN: " + JSON.stringify(result));					
-					
-						response =({status:200, message: "user sensor data received", data:result});						
-						callback(null,response);
-				}
-				else{
-					
-					console.log("in outer else");
-					response =({status:500, message: "user sensor data not received" });
-					callback(null,response);
-				}
-			}
-	 },sqlQuery);
-	
-}
-
-
-function subscribeSensor(msg,callback){
-	var customer_id = msg.customer_id;
-	var sensorData = msg.sensorDetails;
-	var response;
-	console.log("inside subscribeSensor");
-	var sqlQuery = "INSERT INTO sensorconfiguration  (customer_id , sensorid) VALUES ('"+customer_id+"' , '"+sensorData.sensorid+"')";
-	
-	mysql.fetchData(function(err,result){
-		
-			if(err){ 
-				
-				response =({status:500, message: "Subscribe to sensor failed" });
-				callback(null,response);
-			}
-			else{
-				response =({status:200, message: "user subscribed to the sensor", data:result});						
-				callback(null,response);
-			}
-	 },sqlQuery);
-	
-}
-
-exports.subscribeSensor=subscribeSensor;
-exports.getUserSensorList=getUserSensorList;
 exports.signupcustomer=signupcustomer;
 exports.logincustomer=logincustomer;
 exports.customerdashboard=customerdashboard;

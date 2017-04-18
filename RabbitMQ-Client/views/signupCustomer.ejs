@@ -43,10 +43,9 @@
 
 
 
-				<div data-ng-app="signupCustomerApp"
-					data-ng-controller="signupCustomerController">
-					<form class="form-vertical" name="signupCustomer" data-ng-submit="signupCustomer.$valid && signupCustomer1()" novalidate>
-
+				<div data-ng-app="signupCustomerApp" data-ng-controller="signupCustomerController">
+					<form class="form-vertical" name="signupCustomer" data-ng-submit="signupCustomer.
+								$valid && signupCustomer1()" novalidate>
 						<h1 style="color: #fff; text-align: center; font-size: 40px;">Sign up
 						</h1>
 						<hr>
@@ -90,6 +89,60 @@
 								data-ng-show="(signupCustomer.submitted||signupCustomer.password.$touched) && signupCustomer.password.$error.required">
 								<span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>Password
 								required.
+							</div>
+						</div>
+						<div style="font-size: 16px; color: #fff;"
+							class="form-group required "
+							data-ng-class="{
+                    'has-error': (signupCustomer.age.$touched||signupCustomer.age.$dirty||signupCustomer.submitted) && signupCustomer.age.$invalid,
+                    'has-success': signupCustomer.age.$dirty && signupCustomer.age.$valid}">
+							<label class=" control-label" for="age">Age</label> 
+							<input class="form-control" type="number" value="" data-ng-model="customer.age" name="age" id="age"
+								data-ng-pattern="/[a-zA-Z0-9]{6,}/"
+								placeholder="Age" required>
+							<div class="alert alert-danger"
+								data-ng-show="(signupCustomer.submitted||signupCustomer.password.$dirty) && signupCustomer.password.$error.pattern ">
+								<span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>Age is required
+							</div>
+							<div class="alert alert-danger"
+								data-ng-show="(signupCustomer.submitted||signupCustomer.age.$touched) && signupCustomer.age.$error.required">
+								<span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>Age is required.
+							</div>
+						</div>
+						<div style="font-size: 16px; color: #fff;"
+							class="form-group required "
+							data-ng-class="{
+                    'has-error': (signupCustomer.gender.$touched||signupCustomer.gender.$dirty||signupCustomer.submitted) && signupCustomer.gender.$invalid,
+                    'has-success': signupCustomer.gender.$dirty && signupCustomer.gender.$valid}">
+							<label class=" control-label" for="gender">Gender</label> 
+							<input class="form-control" type="text" value="" data-ng-model="customer.gender" name="gender" id="gender"
+								data-ng-pattern="/[a-zA-Z0-9]{6,}/"
+								placeholder="Gender" required>
+							<div class="alert alert-danger"
+								data-ng-show="(signupCustomer.submitted||signupCustomer.gender.$dirty) && signupCustomer.gender.$error.pattern ">
+								<span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>Gender is required
+							</div>
+							<div class="alert alert-danger"
+								data-ng-show="(signupCustomer.submitted||signupCustomer.gender.$touched) && signupCustomer.gender.$error.required">
+								<span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>Gender is required.
+							</div>
+						</div>
+						<div style="font-size: 16px; color: #fff;"
+							class="form-group required "
+							data-ng-class="{
+                    'has-error': (signupCustomer.address.$touched||signupCustomer.address.$dirty||signupCustomer.submitted) && signupCustomer.address.$invalid,
+                    'has-success': signupCustomer.address.$dirty && signupCustomer.address.$valid}">
+							<label class=" control-label" for="address">Address</label> 
+							<input class="form-control" type="number" value="" data-ng-model="customer.address" name="address" id="address"
+								data-ng-pattern="/[a-zA-Z0-9]{6,}/"
+								placeholder="At least 5 characters" required>
+							<div class="alert alert-danger"
+								data-ng-show="(signupCustomer.submitted||signupCustomer.address.$dirty) && signupCustomer.password.$error.pattern ">
+								<span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>Address should be 5 characters
+							</div>
+							<div class="alert alert-danger"
+								data-ng-show="(signupCustomer.submitted||signupCustomer.password.$touched) && signupCustomer.password.$error.required">
+								<span class="glyphicon glyphicon-remove red" aria-hidden="true"></span>Address is required.
 							</div>
 						</div>
 						<div class="form-group">
